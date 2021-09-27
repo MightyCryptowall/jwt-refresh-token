@@ -21,7 +21,9 @@ userSchema.methods = {
                 {
                     expiresIn: "10m",
                 }
+                
             );
+            return accessToken;
         }catch(error) {
             console.error(error);
             return;

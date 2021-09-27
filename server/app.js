@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = requires("cors");
+const cors = require("cors");
 const api = require("./routes");
 const bodyParser = require('body-parser');
 const { application } = require('express');
@@ -14,11 +14,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors());
 
 // setup database connection
-mongoose.connect("mongodb+srv://atom:admin123@cluster0.3ptd2.mongodb.net/jwt-refresh-token",{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-}).then(() => console.log("Database connected"))
+mongoose.connect("mongodb+srv://atom:admin123@cluster0.3ptd2.mongodb.net/jwt-refresh-token").then(() => console.log("Database connected"))
 .catch(err => console.error(err));
 
 // setup routes

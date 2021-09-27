@@ -12,7 +12,8 @@ exports.signup = async (req, res) => {
             return res.status(400).json({error: "Username taken."});
         }else {
             // create new user and generate a pair of tokens and send
-            user = await new User(req.body).save();
+            let password = await bcrypt.hash(req.body.password,10);
+            user = await new User({...req.body, password}).save();
             let accessToken = await user.createAccessToken();
             let refreshToken = await user.createRefreshToken();
 
