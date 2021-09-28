@@ -12,7 +12,7 @@ exports.checkAuth = (req, res, next) => {
     }else{
         try {
             // if the incoming request has a valid token, we extract the payload form the token and attach it to the request object
-            const payload = jwt.verify(token, privateKey);
+            const payload = jwt.verify(token.split(" ")[1], privateKey);
             req.user = payload.user;
             next();
         } catch (error) {

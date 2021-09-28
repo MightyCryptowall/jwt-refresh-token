@@ -7,7 +7,7 @@ axios.interceptors.request.use(
     config => {
         const accessToken = localStorage.getItem("accessToken");
         if(accessToken){
-            config.headers["x-auth-token"] = accessToken;
+            config.headers["x-auth-token"] = `Bearer ${accessToken}`;
         }
         return config;
     },
@@ -34,7 +34,7 @@ axios.interceptors.response.use(
             originalRequest._retry = true;
 
             return axios
-            .post(`${baseURL}/auth/refresh_token`, { refreshToken })
+            .post(`${baseURL}/auth/refresh_token`, { refreshToken: `Bearer ${refreshToken}` })
             .then( res => {
                 if(res.status === 200){
                     localStorage.setItem("accessToken", res.data.accessToken);
